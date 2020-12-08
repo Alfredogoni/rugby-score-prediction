@@ -7,10 +7,10 @@ import sqlite3
 def prep_team_data(df, country):
 
     '''
-
+    Cleans match result data
     :param df: Dataframe of raw match results
     :param country: List of countries to keep in the dataset
-    :return: A dataframe of clean match results
+    :return: DataFrame of clean match results
     '''
 
     try:
@@ -54,9 +54,10 @@ def prep_team_data(df, country):
 def add_rankings(match_results_clean, rankings):
 
     '''
-    :param match_results_clean:
-    :param rankings:
-    :return:
+    Adds WR rankings to match results
+    :param match_results_clean: DataFrame of clean match results
+    :param rankings: DataFrame of WR rankings
+    :return: A DataFrame of combined match results and their associated team WR rankings
     '''
 
     # Ensure Match Date format is the same between team_ratings and all_rankings
@@ -86,6 +87,12 @@ def add_rankings(match_results_clean, rankings):
 
 
 def add_lost_results(df):
+
+    '''
+    Switches winning team and losing team in match results
+    :param df: DataFrame of match results
+    :return: DataFrame of match results with team1 and team2 inverted i.e. winning team becomes losing team
+    '''
 
     try:
         # Prepare ratings data by adding in lost results (i.e. duplicate wins and invert data)
@@ -119,6 +126,14 @@ def add_lost_results(df):
 # Get latest team ranking and skill level data
 
 def get_stats(df, country):
+
+    '''
+    Get latest rankings and skills as at last played match
+    :param df: DataFrame of latest match results, WR rankings and skill levels
+    :param country: List of countries to include
+    :return: DataFrame of latest ranking and skill level by team
+    '''
+
 
     df = df.sort_values(['Match Date'], ascending=True)
     stats = pd.DataFrame()
@@ -165,7 +180,6 @@ except Exception as e:
 # Calculate team skill levels
 try:
     matches_rankings_skill = skill_level.rate_teams(match_results_with_rankings)
-    # matches_rankings_skill.to_csv("matches_rankings_skills.csv")
     print("Team skill assessment complete")
 
 except Exception as e:
