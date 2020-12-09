@@ -12,7 +12,7 @@ An demo project to provide a high-level overview of the key steps needed in goin
 - Web app with Flask (and a bit of CSS & HTML)
 - App deployment with Docker and Heroku
 
-Read more here:
+Read more here: https://towardsdatascience.com/an-end-to-end-machine-learning-project-with-python-pandas-keras-flask-docker-and-heroku-c987018c42c7
 
 
 
